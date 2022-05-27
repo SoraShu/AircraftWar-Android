@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
-import com.sorashu.aircraftwar.mainGame;
+import com.sorashu.aircraftwar.application.mainGame;
 
 public class AndroidLauncher extends AndroidApplication {
 	@Override
