@@ -1,6 +1,6 @@
 package com.sorashu.aircraftwar.bullet;
 
-import com.sorashu.aircraftwar.application.mainGame;
+import com.sorashu.aircraftwar.application.MainGame;
 import com.sorashu.aircraftwar.basic.AbstractFlyingObject;
 
 public abstract class AbstractBullet extends AbstractFlyingObject {
@@ -15,7 +15,7 @@ public abstract class AbstractBullet extends AbstractFlyingObject {
     @Override
     public void forward() {
         super.forward();
-        if (collisionModel.x <= 0 || collisionModel.x >= mainGame.viewportWidth) {
+        if (collisionModel.x <= 0 || collisionModel.x >= MainGame.viewportWidth) {
             vanish();
         }
     }

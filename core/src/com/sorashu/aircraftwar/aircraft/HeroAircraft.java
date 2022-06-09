@@ -5,13 +5,13 @@ import com.sorashu.aircraftwar.shoot.StraightShoot;
 public class HeroAircraft extends AbstractAircraft{
 
     //TODO heroAircraft gen
-    private static HeroAircraft heroAircraft;
+    private static HeroAircraft heroAircraft = new HeroAircraft(0,0,0,0,3000);
 
     public HeroAircraft(float locationX, float locationY, float speedX, float speedY, int hp) {
         super(locationX, locationY, speedX, speedY, hp);
         shootNum = 1;
         power = 30;
-        direction = -1;
+        direction = 1;
         this.setShootStrategy(new StraightShoot());
     }
 
@@ -19,9 +19,4 @@ public class HeroAircraft extends AbstractAircraft{
         return heroAircraft;
     }
 
-    // empty
-    @Override
-    public void forward() {
-
-    }
 }

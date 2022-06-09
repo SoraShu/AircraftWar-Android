@@ -1,6 +1,5 @@
 package com.sorashu.aircraftwar.aircraft;
 
-import com.sorashu.aircraftwar.application.mainGame;
 import com.sorashu.aircraftwar.prop.AbstractProp;
 
 import java.util.List;

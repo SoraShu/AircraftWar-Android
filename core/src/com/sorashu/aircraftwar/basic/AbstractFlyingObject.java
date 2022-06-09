@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.sorashu.aircraftwar.application.ImageManager;
-import com.sorashu.aircraftwar.application.mainGame;
+import com.sorashu.aircraftwar.application.MainGame;
 
 public abstract class AbstractFlyingObject {
     //locationX、locationY为图片中心位置坐标
@@ -22,6 +22,7 @@ public abstract class AbstractFlyingObject {
         getImage();
         getWidth();
         getHeight();
+        this.collisionModel = new Rectangle(locationX, locationY, width, height);
 
     }
 
@@ -88,10 +89,10 @@ public abstract class AbstractFlyingObject {
     public void forward() {
         collisionModel.x += speedX * Gdx.graphics.getDeltaTime();
         collisionModel.y += speedY * Gdx.graphics.getDeltaTime();
-        if (collisionModel.x <= 0 || collisionModel.x >= mainGame.viewportWidth) {
+        if (collisionModel.x <= 0 || collisionModel.x >= MainGame.viewportWidth) {
             speedX = -speedX;
         }
-        if (collisionModel.y + height < 0 || collisionModel.y-height>mainGame.viewportHeight) {
+        if (collisionModel.y + height < 0 || collisionModel.y-height> MainGame.viewportHeight) {
             vanish();
         }
     }

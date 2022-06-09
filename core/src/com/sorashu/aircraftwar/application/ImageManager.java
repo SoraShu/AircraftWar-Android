@@ -49,5 +49,23 @@ public class ImageManager {
         return CLASSNAME_IMAGE_MAP.get(object.getClass().getName());
     }
 
+    public static void dipose() {
+        HERO_IMAGE.dispose();
+        HERO_BULLET_IMAGE.dispose();
+        ENEMY_BULLET_IMAGE.dispose();
+        MOB_ENEMY_IMAGE.dispose();
+        BOSS_ENEMY_IMAGE.dispose();
+        ELITE_ENEMY_IMAGE.dispose();
+        BOMB_PROP_IMAGE.dispose();
+        BLOOD_PROP_IMAGE.dispose();
+        BULLET_PROP_IMAGE.dispose();
+//        BACKGROUND_IMAGE1.dispose();
+//        BACKGROUND_IMAGE2.dispose();
+//        BACKGROUND_IMAGE3.dispose();
+//        BACKGROUND_IMAGE4.dispose();
+//        BACKGROUND_IMAGE5.dispose();
+        BACKGROUND_IMAGE.dispose();
+    }
+
 
 }

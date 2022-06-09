@@ -14,7 +14,7 @@ public class EliteEnemy extends EnemyAircraft{
         score = 20;
         shootNum = 1;
         power = 30;
-        direction = 1;
+        direction = -1;
         this.setShootStrategy(new StraightShoot());
     }
 

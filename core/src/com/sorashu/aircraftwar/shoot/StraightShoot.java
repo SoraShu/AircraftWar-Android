@@ -19,7 +19,7 @@ public class StraightShoot implements Shoot {
         int shootNum = aircraft.getShootNum();
 
         switch (aircraft.getDirection()) {
-            case -1:
+            case 1:
                 for (int i = 0; i < shootNum; i++) {
                     // 子弹发射位置相对飞机位置向前偏移
                     // 多个子弹横向分散
@@ -27,12 +27,12 @@ public class StraightShoot implements Shoot {
                             aircraft.getLocationX() + (i * 2 - shootNum + 1) * 10,
                             aircraft.getLocationY(),
                             0,
-                            aircraft.getSpeedY() + aircraft.getDirection() * 10,
+                            aircraft.getDirection() * 100,
                             aircraft.getPower());
                     res.add(abstractBullet);
                 }
                 break;
-            case 1:
+            case -1:
                 for (int i = 0; i < shootNum; i++) {
                     // 子弹发射位置相对飞机位置向前偏移
                     // 多个子弹横向分散
@@ -40,7 +40,7 @@ public class StraightShoot implements Shoot {
                             aircraft.getLocationX() + (i * 2 - shootNum + 1) * 10,
                             aircraft.getLocationY(),
                             0,
-                            aircraft.getSpeedY() + aircraft.getDirection() * 10,
+                            aircraft.getDirection() * 250,
                             aircraft.getPower());
                     res.add(abstractBullet);
                 }
