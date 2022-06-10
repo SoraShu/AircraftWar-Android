@@ -67,6 +67,14 @@ public abstract class AbstractFlyingObject {
         return image;
     }
 
+    public float getCenterX() {
+        return collisionModel.x + 0.5f * width;
+    }
+
+    public float getCenterY() {
+        return collisionModel.y + 0.5f * height;
+    }
+
     /*--------------------------------------
                       setter
      --------------------------------------*/
@@ -89,7 +97,7 @@ public abstract class AbstractFlyingObject {
     public void forward() {
         collisionModel.x += speedX * Gdx.graphics.getDeltaTime();
         collisionModel.y += speedY * Gdx.graphics.getDeltaTime();
-        if (collisionModel.x <= 0 || collisionModel.x >= MainGame.viewportWidth) {
+        if (collisionModel.x <= 0 || collisionModel.x + width >= MainGame.viewportWidth) {
             speedX = -speedX;
         }
         if (collisionModel.y + height < 0 || collisionModel.y-height> MainGame.viewportHeight) {

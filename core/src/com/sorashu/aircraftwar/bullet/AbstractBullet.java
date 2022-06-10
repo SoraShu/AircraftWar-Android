@@ -15,7 +15,7 @@ public abstract class AbstractBullet extends AbstractFlyingObject {
     @Override
     public void forward() {
         super.forward();
-        if (collisionModel.x <= 0 || collisionModel.x >= MainGame.viewportWidth) {
+        if (collisionModel.x <= 0 || collisionModel.x + width >= MainGame.viewportWidth) {
             vanish();
         }
     }
