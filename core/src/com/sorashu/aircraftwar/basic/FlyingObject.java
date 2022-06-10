@@ -6,7 +6,7 @@ import com.badlogic.gdx.math.Rectangle;
 import com.sorashu.aircraftwar.application.ImageManager;
 import com.sorashu.aircraftwar.application.MainGame;
 
-public abstract class AbstractFlyingObject {
+public abstract class FlyingObject {
     //locationX、locationY为图片中心位置坐标
     protected float speedX;
     protected float speedY;
@@ -16,7 +16,7 @@ public abstract class AbstractFlyingObject {
     protected Rectangle collisionModel = null;
     protected boolean isValid = true;
 
-    public AbstractFlyingObject(float locationX,float locationY,float speedX,float speedY) {
+    public FlyingObject(float locationX, float locationY, float speedX, float speedY) {
         this.speedX = speedX;
         this.speedY = speedY;
         getImage();
@@ -105,7 +105,7 @@ public abstract class AbstractFlyingObject {
         }
     }
 
-    public boolean crash(AbstractFlyingObject flyingObject) {
+    public boolean crash(FlyingObject flyingObject) {
         return collisionModel.overlaps(flyingObject.collisionModel);
     }
 

@@ -1,6 +1,6 @@
 package com.sorashu.aircraftwar.aircraft;
 
-import com.sorashu.aircraftwar.prop.AbstractProp;
+import com.sorashu.aircraftwar.prop.Prop;
 import com.sorashu.aircraftwar.shoot.StraightShoot;
 
 import java.util.LinkedList;
@@ -19,10 +19,10 @@ public class EliteEnemy extends EnemyAircraft{
     }
 
     @Override
-    public List<AbstractProp> leftProp() {
+    public List<Prop> leftProp() {
         Random rnd = new Random();
         int temp = rnd.nextInt(8);
-        List<AbstractProp> list = new LinkedList<>();
+        List<Prop> list = new LinkedList<>();
 
         //TODO
 //        PropFactory propfactory = null;

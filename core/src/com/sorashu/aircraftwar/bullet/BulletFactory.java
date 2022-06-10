@@ -8,5 +8,5 @@ public abstract class BulletFactory {
     public BulletFactory(int power) {
         this.power = power;
     }
-    public abstract AbstractBullet createBullet(float locationX, float locationY, float speedX, float speedY);
+    public abstract Bullet createBullet(float locationX, float locationY, float speedX, float speedY);
 }

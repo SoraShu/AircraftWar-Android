@@ -1,13 +1,13 @@
 package com.sorashu.aircraftwar.bullet;
 
 import com.sorashu.aircraftwar.application.MainGame;
-import com.sorashu.aircraftwar.basic.AbstractFlyingObject;
+import com.sorashu.aircraftwar.basic.FlyingObject;
 
-public abstract class AbstractBullet extends AbstractFlyingObject {
+public abstract class Bullet extends FlyingObject {
 
     private int power;
 
-    public AbstractBullet(float locationX, float locationY, float speedX, float speedY,int power) {
+    public Bullet(float locationX, float locationY, float speedX, float speedY, int power) {
         super(locationX, locationY, speedX, speedY);
         this.power = power;
     }

@@ -12,14 +12,14 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
-import com.sorashu.aircraftwar.aircraft.AbstractAircraft;
+import com.sorashu.aircraftwar.aircraft.Aircraft;
 import com.sorashu.aircraftwar.aircraft.EliteEnemy;
 import com.sorashu.aircraftwar.aircraft.EnemyAircraft;
 import com.sorashu.aircraftwar.aircraft.HeroAircraft;
 import com.sorashu.aircraftwar.aircraft.MobEnemy;
-import com.sorashu.aircraftwar.basic.AbstractFlyingObject;
-import com.sorashu.aircraftwar.bullet.AbstractBullet;
-import com.sorashu.aircraftwar.prop.AbstractProp;
+import com.sorashu.aircraftwar.basic.FlyingObject;
+import com.sorashu.aircraftwar.bullet.Bullet;
+import com.sorashu.aircraftwar.prop.Prop;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -53,9 +53,9 @@ public class MainGame extends ApplicationAdapter {
     private HeroAircraft heroAircraft;
     private List<EnemyAircraft> enemyAircrafts;
     private List<EnemyAircraft> bossAircrafts;
-    private List<AbstractBullet> heroBullets;
-    private List<AbstractBullet> enemyBullets;
-    private List<AbstractProp> allProps;
+    private List<Bullet> heroBullets;
+    private List<Bullet> enemyBullets;
+    private List<Prop> allProps;
 
     private int score = 0;
     private long time = 0;
@@ -179,25 +179,25 @@ public class MainGame extends ApplicationAdapter {
     }
 
     private void bulletsMoveAction() {
-        for (AbstractBullet bullet : heroBullets) {
+        for (Bullet bullet : heroBullets) {
             bullet.forward();
         }
-        for (AbstractBullet bullet : enemyBullets) {
+        for (Bullet bullet : enemyBullets) {
             bullet.forward();
         }
     }
 
     private void enemyMoveAction() {
-        for (AbstractAircraft enemy : enemyAircrafts) {
+        for (Aircraft enemy : enemyAircrafts) {
             enemy.forward();
         }
-        for (AbstractAircraft boss : bossAircrafts) {
+        for (Aircraft boss : bossAircrafts) {
             boss.forward();
         }
     }
 
     private void propMoveAction() {
-        for (AbstractProp prop : allProps) {
+        for (Prop prop : allProps) {
             prop.forward();
         }
     }
@@ -231,7 +231,7 @@ public class MainGame extends ApplicationAdapter {
 
     private void crashCheckAction() {
         // check if enemy bullets hit hero
-        for (AbstractBullet bullet : enemyBullets) {
+        for (Bullet bullet : enemyBullets) {
             if (bullet.notValid()) {
                 continue;
             }
@@ -245,7 +245,7 @@ public class MainGame extends ApplicationAdapter {
         }
 
         // check whether hero bullets or hero hit enemy or boss
-        for (AbstractBullet bullet : heroBullets) {
+        for (Bullet bullet : heroBullets) {
             // hit enemy
             if (shootEnemy(bullet, enemyAircrafts)) {
                 continue;
@@ -254,7 +254,7 @@ public class MainGame extends ApplicationAdapter {
             shootEnemy(bullet, bossAircrafts);
         }
 
-        for (AbstractProp prop : allProps) {
+        for (Prop prop : allProps) {
             if (prop.notValid()) {
                 continue;
             }
@@ -274,7 +274,7 @@ public class MainGame extends ApplicationAdapter {
      * @param bullet 子弹
      * @return 是否跳过循环
      */
-    private boolean shootEnemy(AbstractBullet bullet, List<EnemyAircraft> enemys) {
+    private boolean shootEnemy(Bullet bullet, List<EnemyAircraft> enemys) {
         if (bullet.notValid()) {
             return true;
         }
@@ -319,9 +319,9 @@ public class MainGame extends ApplicationAdapter {
         drawAndRemove(allProps);
     }
 
-    private void drawAndRemove(List<? extends AbstractFlyingObject> flyingObjects) {
-        for (Iterator<? extends AbstractFlyingObject> iterator = flyingObjects.iterator(); iterator.hasNext();) {
-            AbstractFlyingObject flyingObject = iterator.next();
+    private void drawAndRemove(List<? extends FlyingObject> flyingObjects) {
+        for (Iterator<? extends FlyingObject> iterator = flyingObjects.iterator(); iterator.hasNext();) {
+            FlyingObject flyingObject = iterator.next();
             if (flyingObject.notValid()) {
                 iterator.remove();
             } else {
@@ -361,8 +361,8 @@ public class MainGame extends ApplicationAdapter {
 //        drawList(allProps);
 //    }
 
-    private void drawList(List<? extends AbstractFlyingObject> flyingObjects) {
-        for (AbstractFlyingObject flyingObject : flyingObjects) {
+    private void drawList(List<? extends FlyingObject> flyingObjects) {
+        for (FlyingObject flyingObject : flyingObjects) {
             batch.draw(
                     flyingObject.getImage(),
                     flyingObject.getLocationX(),

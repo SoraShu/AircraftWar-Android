@@ -1,10 +1,10 @@
 package com.sorashu.aircraftwar.aircraft;
 
-import com.sorashu.aircraftwar.prop.AbstractProp;
+import com.sorashu.aircraftwar.prop.Prop;
 
 import java.util.List;
 
-public abstract class EnemyAircraft extends AbstractAircraft{
+public abstract class EnemyAircraft extends Aircraft {
 
     protected int score;
 
@@ -21,5 +21,5 @@ public abstract class EnemyAircraft extends AbstractAircraft{
      *
      * @return List<AbstractProp>
      */
-    public abstract List<AbstractProp> leftProp();
+    public abstract List<Prop> leftProp();
 }

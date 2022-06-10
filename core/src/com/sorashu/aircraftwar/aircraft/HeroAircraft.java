@@ -2,7 +2,7 @@ package com.sorashu.aircraftwar.aircraft;
 
 import com.sorashu.aircraftwar.shoot.StraightShoot;
 
-public class HeroAircraft extends AbstractAircraft{
+public class HeroAircraft extends Aircraft {
 
     //TODO heroAircraft gen
     private static HeroAircraft heroAircraft = new HeroAircraft(0,0,0,0,3000);

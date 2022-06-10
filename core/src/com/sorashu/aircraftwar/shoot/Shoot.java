@@ -1,7 +1,7 @@
 package com.sorashu.aircraftwar.shoot;
 
-import com.sorashu.aircraftwar.aircraft.AbstractAircraft;
-import com.sorashu.aircraftwar.bullet.AbstractBullet;
+import com.sorashu.aircraftwar.aircraft.Aircraft;
+import com.sorashu.aircraftwar.bullet.Bullet;
 
 import java.util.List;
 
@@ -15,5 +15,5 @@ public interface Shoot {
      * @param aircraft 传入调用者
      * @return 子弹列表: list
      */
-    List<AbstractBullet> doShootAction(AbstractAircraft aircraft);
+    List<Bullet> doShootAction(Aircraft aircraft);
 }

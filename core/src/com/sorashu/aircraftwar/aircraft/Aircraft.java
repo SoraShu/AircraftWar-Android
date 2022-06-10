@@ -1,12 +1,12 @@
 package com.sorashu.aircraftwar.aircraft;
 
-import com.sorashu.aircraftwar.basic.AbstractFlyingObject;
-import com.sorashu.aircraftwar.bullet.AbstractBullet;
+import com.sorashu.aircraftwar.basic.FlyingObject;
+import com.sorashu.aircraftwar.bullet.Bullet;
 import com.sorashu.aircraftwar.shoot.Shoot;
 
 import java.util.List;
 
-public abstract class AbstractAircraft extends AbstractFlyingObject {
+public abstract class Aircraft extends FlyingObject {
 
 
 
@@ -49,7 +49,7 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
 
 
 
-    public AbstractAircraft(float locationX, float locationY, float speedX, float speedY, int hp) {
+    public Aircraft(float locationX, float locationY, float speedX, float speedY, int hp) {
         super(locationX, locationY, speedX, speedY);
         this.hp = hp;
         this.maxHp = hp;
@@ -70,7 +70,7 @@ public abstract class AbstractAircraft extends AbstractFlyingObject {
         }
     }
 
-    public List<AbstractBullet> shoot() {
+    public List<Bullet> shoot() {
         return this.executeShootStrategy().doShootAction(this);
     }
 }

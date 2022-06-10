@@ -6,7 +6,7 @@ public class HeroBulletFactory extends BulletFactory {
     }
 
     @Override
-    public AbstractBullet createBullet(float locationX, float locationY, float speedX, float speedY) {
+    public Bullet createBullet(float locationX, float locationY, float speedX, float speedY) {
         return new HeroBullet(locationX, locationY, speedX, speedY, power);
     }
 }

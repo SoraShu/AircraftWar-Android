@@ -1,6 +1,6 @@
 package com.sorashu.aircraftwar.aircraft;
 
-import com.sorashu.aircraftwar.prop.AbstractProp;
+import com.sorashu.aircraftwar.prop.Prop;
 import com.sorashu.aircraftwar.shoot.NullShoot;
 
 import java.util.LinkedList;
@@ -17,7 +17,7 @@ public class MobEnemy extends EnemyAircraft{
     }
 
     @Override
-    public List<AbstractProp> leftProp() {
+    public List<Prop> leftProp() {
         return new LinkedList<>();
     }
 }
