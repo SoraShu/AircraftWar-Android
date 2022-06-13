@@ -11,6 +11,10 @@ public class AndroidLauncher extends AndroidApplication {
 	protected void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-		initialize(new MainGame(new CommunicationImpl(this)), config);
+
+		int difficulty = getIntent().getIntExtra("difficulty", 0);
+		boolean soundIsOn = getIntent().getBooleanExtra("isSoundOn", false);
+
+		initialize(new MainGame(new CommunicationImpl(this),difficulty,soundIsOn), config);
 	}
 }

@@ -100,7 +100,7 @@ public abstract class FlyingObject {
         if (collisionModel.x <= 0 || collisionModel.x + width >= MainGame.viewportWidth) {
             speedX = -speedX;
         }
-        if (collisionModel.y + height < 0 || collisionModel.y-height> MainGame.viewportHeight) {
+        if (collisionModel.y + height < 0 || collisionModel.y - height > MainGame.viewportHeight) {
             vanish();
         }
     }

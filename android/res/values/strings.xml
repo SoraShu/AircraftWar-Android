@@ -3,4 +3,9 @@
 
     <string name="app_name">AircraftGame</string>
     <string name="play_button">PLAY</string>
+    <string name="cap_easy">EASY</string>
+    <string name="cap_normal">NORMAL</string>
+    <string name="cap_difficult">DIFFICULT</string>
+    <string name="sound">sound</string>
+    <string name="difficultychoices">Difficulty Choices</string>
 </resources>

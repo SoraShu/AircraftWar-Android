@@ -29,12 +29,26 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MainGame extends ApplicationAdapter {
-    public MainGame() {
 
+    public MainGame(CommunicationInterface communicationInterface, int difficulty, boolean isSoundOn) {
+        this.communicationInterface = communicationInterface;
+        difficultyGen(difficulty);
     }
 
-    public MainGame(CommunicationInterface communicationInterface) {
-        this.communicationInterface = communicationInterface;
+    private void difficultyGen(int diffIndex) {
+        switch (diffIndex) {
+            case 0:
+                difficulty = Difficulty.EASY;
+                break;
+            case 1:
+                difficulty = Difficulty.NORMAL;
+                break;
+            case 2:
+                difficulty = Difficulty.DIFFICULT;
+        }
+        enemyMaxNum = difficulty.getEnemyMaxNum();
+        bossScoreThereShould = difficulty.getBossScoreThereShould();
+
     }
 
     private CommunicationInterface communicationInterface;
@@ -53,6 +67,9 @@ public class MainGame extends ApplicationAdapter {
     private BitmapFont font;
 
     private float backgroundTop;
+
+    private Difficulty difficulty;
+
 
     private int enemyMaxNum = 5;
     private int heroSpeed = 1000;
@@ -82,6 +99,7 @@ public class MainGame extends ApplicationAdapter {
         camera.setToOrtho(false, viewportWidth, viewportHeight);
         viewport = new ExtendViewport(viewportWidth, viewportHeight, camera);
         backgroundTexture = ImageManager.BACKGROUND_IMAGE;
+
         backgroundTop = viewportHeight;
 
         FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("ttf/IBMPlexSans-Bold.ttf"));
@@ -91,7 +109,7 @@ public class MainGame extends ApplicationAdapter {
         font = fontGenerator.generateFont(parameter);
         fontGenerator.dispose();
 
-        heroAircraft = HeroAircraft.getHeroAircraft();
+        heroAircraft = new HeroAircraft(0,0,0,0,3000);
         heroAircraft.setLocation((float) viewportWidth / 2 - (float) heroAircraft.getWidth() / 2, 0);
         enemyAircrafts = new LinkedList<>();
         bossAircrafts = new LinkedList<>();
@@ -140,7 +158,7 @@ public class MainGame extends ApplicationAdapter {
     @Override
     public void dispose() {
         batch.dispose();
-        ImageManager.dipose();
+//        ImageManager.dipose();
     }
 
     /*--------------------------------------------
@@ -170,8 +188,8 @@ public class MainGame extends ApplicationAdapter {
     private void bossEnemyGen() {
         if(bossCounter > 0 && bossAircrafts.isEmpty()) {
             bossAircrafts.add(new BossEnemy(
-                    MathUtils.random(0F, (float) viewportWidth - ImageManager.ELITE_ENEMY_IMAGE.getWidth()),
-                    MathUtils.random((float) (viewportHeight * 0.8), (float) (viewportHeight * 0.9)),
+                    (viewportWidth - ImageManager.BOSS_ENEMY_IMAGE.getWidth()),
+                    MathUtils.random((float) (viewportHeight * 0.7), (float) (viewportHeight * 0.8)),
                     70, 0, 500
             ));
         }

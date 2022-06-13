@@ -16,6 +16,9 @@
         android:label="@string/app_name"
         tools:ignore="UnusedAttribute">
         <activity
+            android:name=".DifficultyActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
