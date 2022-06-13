@@ -9,6 +9,9 @@ import java.util.List;
 public abstract class Aircraft extends FlyingObject {
 
 
+    public int getHp() {
+        return hp;
+    }
 
     protected int hp;
     protected int maxHp;

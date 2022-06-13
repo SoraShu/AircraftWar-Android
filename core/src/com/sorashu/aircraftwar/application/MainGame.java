@@ -2,10 +2,12 @@ package com.sorashu.aircraftwar.application;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
@@ -26,7 +28,15 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class MainGame extends ApplicationAdapter {
+    public MainGame() {
 
+    }
+
+    public MainGame(CommunicationInterface communicationInterface) {
+        this.communicationInterface = communicationInterface;
+    }
+
+    private CommunicationInterface communicationInterface;
     private SpriteBatch batch;
     private Texture backgroundTexture;
     //TODO viewport gen
@@ -73,6 +83,13 @@ public class MainGame extends ApplicationAdapter {
         backgroundTexture = ImageManager.BACKGROUND_IMAGE;
         backgroundTop = viewportHeight;
 
+        FreeTypeFontGenerator fontGenerator = new FreeTypeFontGenerator(Gdx.files.internal("ttf/IBMPlexSans-Bold.ttf"));
+        FreeTypeFontGenerator.FreeTypeFontParameter parameter = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        parameter.size = 24;
+        parameter.color = Color.valueOf("e03131");
+        font = fontGenerator.generateFont(parameter);
+        fontGenerator.dispose();
+
         heroAircraft = HeroAircraft.getHeroAircraft();
         heroAircraft.setLocation((float) viewportWidth / 2 - (float) heroAircraft.getWidth() / 2, 0);
         enemyAircrafts = new LinkedList<>();
@@ -90,6 +107,7 @@ public class MainGame extends ApplicationAdapter {
         batch.begin();
         drawBackground();
         drawAllObjectAndRemove();
+        font.draw(batch, "SCORE: " + score + "\nLIFE:" + heroAircraft.getHp(), 5, viewportHeight - 10);
         batch.end();
 
         /*--------------------------------------------
@@ -110,6 +128,8 @@ public class MainGame extends ApplicationAdapter {
         moveAction();
 
         crashCheckAction();
+
+        endGameCheck();
 
         preTime = time;
 
@@ -296,12 +316,20 @@ public class MainGame extends ApplicationAdapter {
             if (enemy.crash(heroAircraft) || heroAircraft.crash(enemy)) {
                 enemy.vanish();
                 heroAircraft.decreaseHp(Integer.MAX_VALUE);
+                heroAircraft.notValid();
             }
             if (preScore / bossScoreThereShould < score / bossScoreThereShould) {
                 bossCounter++;
             }
         }
         return false;
+    }
+
+    private void endGameCheck() {
+        if (heroAircraft.notValid()) {
+            communicationInterface.goRankListActivity(score);
+            communicationInterface.endGame();
+        }
     }
 
     private void drawAllObjectAndRemove() {

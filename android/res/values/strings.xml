@@ -2,5 +2,5 @@
 <resources>
 
     <string name="app_name">AircraftGame</string>
-
+    <string name="play_button">PLAY</string>
 </resources>

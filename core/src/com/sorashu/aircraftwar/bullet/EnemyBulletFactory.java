@@ -7,6 +7,6 @@ public class EnemyBulletFactory extends BulletFactory{
 
     @Override
     public Bullet createBullet(float locationX, float locationY, float speedX, float speedY) {
-        return new EnemyBullet(locationX, locationY, speedX, speedY, power);
+        return new EnemyBullet(locationX, locationY, speedX, -speedY, power);
     }
 }

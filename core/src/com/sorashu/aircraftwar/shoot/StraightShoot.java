@@ -26,7 +26,7 @@ public class StraightShoot implements Shoot {
                 factory = new HeroBulletFactory(aircraft.getPower());
                 speedY = 100;
                 break;
-            case 2:
+            case -1:
                 factory = new EnemyBulletFactory(aircraft.getPower());
                 speedY = 250;
                 break;
