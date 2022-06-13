@@ -15,6 +15,7 @@ import com.badlogic.gdx.utils.TimeUtils;
 import com.badlogic.gdx.utils.viewport.ExtendViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.sorashu.aircraftwar.aircraft.Aircraft;
+import com.sorashu.aircraftwar.aircraft.BossEnemy;
 import com.sorashu.aircraftwar.aircraft.EliteEnemy;
 import com.sorashu.aircraftwar.aircraft.EnemyAircraft;
 import com.sorashu.aircraftwar.aircraft.HeroAircraft;
@@ -71,7 +72,7 @@ public class MainGame extends ApplicationAdapter {
     private long time = 0;
     private long preTime = 0;
     private int bossCounter = 0;
-    private int bossScoreThereShould = 400;
+    private int bossScoreThereShould = 100;
 
 
     @Override
@@ -167,9 +168,13 @@ public class MainGame extends ApplicationAdapter {
     }
 
     private void bossEnemyGen() {
-//        if(bossCounter > 0 && bossAircrafts.isEmpty()) {
-//            bossAircrafts.add()
-//        }
+        if(bossCounter > 0 && bossAircrafts.isEmpty()) {
+            bossAircrafts.add(new BossEnemy(
+                    MathUtils.random(0F, (float) viewportWidth - ImageManager.ELITE_ENEMY_IMAGE.getWidth()),
+                    MathUtils.random((float) (viewportHeight * 0.8), (float) (viewportHeight * 0.9)),
+                    70, 0, 500
+            ));
+        }
     }
 
     private boolean newCycleJudge(long duration) {

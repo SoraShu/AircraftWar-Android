@@ -1,6 +1,10 @@
 package com.sorashu.aircraftwar.aircraft;
 
+import com.sorashu.aircraftwar.prop.BloodPropFactory;
+import com.sorashu.aircraftwar.prop.BombPropFactory;
+import com.sorashu.aircraftwar.prop.BulletPropFactory;
 import com.sorashu.aircraftwar.prop.Prop;
+import com.sorashu.aircraftwar.prop.PropFactory;
 import com.sorashu.aircraftwar.shoot.StraightShoot;
 
 import java.util.LinkedList;
@@ -25,23 +29,23 @@ public class EliteEnemy extends EnemyAircraft{
         List<Prop> list = new LinkedList<>();
 
         //TODO
-//        PropFactory propfactory = null;
-//        switch (temp) {
-//            case 5:
-//                propfactory = new BloodPropFactory();
-//                break;
-//            case 6:
-//                propfactory = new BombPropFactory();
-//                break;
-//            case 7:
-//                propfactory = new BulletPropFactory();
-//                break;
-//            default:
-//                break;
-//        }
-//        if (propfactory != null) {
-//            list.add(propfactory.createProp(locationX, locationY, speedX, speedY));
-//        }
+        PropFactory propfactory = null;
+        switch (temp) {
+            case 5:
+                propfactory = new BloodPropFactory();
+                break;
+            case 6:
+                propfactory = new BombPropFactory();
+                break;
+            case 7:
+                propfactory = new BulletPropFactory();
+                break;
+            default:
+                break;
+        }
+        if (propfactory != null) {
+            list.add(propfactory.createProp(this.getCenterX(), this.getCenterY(), speedX, speedY));
+        }
         return list;
     }
 }
