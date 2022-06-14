@@ -2,6 +2,8 @@ package com.sorashu.aircraftwar.application;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
@@ -98,6 +100,11 @@ public class MainGame extends ApplicationAdapter {
     private int bossCounter = 0;
     private int bossScoreThereShould = 100;
 
+    private Music bgm;
+    private Music bossBgm;
+    private Sound getSupply;
+    private Sound gameOver;
+
 
     @Override
     public void create() {
@@ -123,6 +130,17 @@ public class MainGame extends ApplicationAdapter {
         heroBullets = new LinkedList<>();
         enemyBullets = new LinkedList<>();
         allProps = new LinkedList<>();
+
+        bgm = Gdx.audio.newMusic(Gdx.files.internal("music/bgm.wav"));
+        bgm.setLooping(true);
+        bossBgm = Gdx.audio.newMusic(Gdx.files.internal("music/bgm_boss.wav"));
+        bossBgm.setLooping(true);
+        getSupply = Gdx.audio.newSound(Gdx.files.internal("music/get_supply.wav"));
+        gameOver = Gdx.audio.newSound(Gdx.files.internal("music/game_over.wav"));
+
+        if (isSoundOn) {
+            bgm.play();
+        }
     }
 
     @Override
@@ -173,6 +191,12 @@ public class MainGame extends ApplicationAdapter {
                        TODO:action 各部分
     ---------------------------------------------*/
 
+    private void playSound(Sound sound) {
+        if (isSoundOn) {
+            sound.play();
+        }
+    }
+
     private void drawFont() {
         String info;
         if (isOnline) {
@@ -211,6 +235,11 @@ public class MainGame extends ApplicationAdapter {
                     MathUtils.random((float) (viewportHeight * 0.7), (float) (viewportHeight * 0.8)),
                     70, 0, 500
             ));
+            if (isSoundOn) {
+                bgm.pause();
+                bossBgm.setPosition(0);
+                bossBgm.play();
+            }
         }
     }
 
@@ -325,6 +354,7 @@ public class MainGame extends ApplicationAdapter {
             }
             if (heroAircraft.crash(prop)) {
                 prop.takeEffect(heroAircraft);
+                playSound(getSupply);
                 prop.vanish();
             }
         }
@@ -369,6 +399,7 @@ public class MainGame extends ApplicationAdapter {
 
     private void endGameCheck() {
         if (heroAircraft.notValid()) {
+            playSound(gameOver);
             communicationInterface.goRankListActivity(score);
             communicationInterface.endGame();
         }
@@ -378,6 +409,15 @@ public class MainGame extends ApplicationAdapter {
         drawAndRemove(heroBullets);
         drawAndRemove(enemyBullets);
         drawAndRemove(enemyAircrafts);
+        if (isSoundOn) {
+            for (Aircraft boss : bossAircrafts) {
+                if (boss.notValid()) {
+                    bossBgm.pause();
+                    bgm.setPosition(0);
+                    bgm.play();
+                }
+            }
+        }
         drawAndRemove(bossAircrafts);
         batch.draw(
                 heroAircraft.getImage(),
