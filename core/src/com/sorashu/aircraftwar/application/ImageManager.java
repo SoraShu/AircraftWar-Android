@@ -14,6 +14,7 @@ import com.sorashu.aircraftwar.prop.BulletProp;
 import java.util.HashMap;
 import java.util.Map;
 
+import jdk.internal.org.jline.utils.DiffHelper;
 import jdk.internal.org.jline.utils.Log;
 
 public class ImageManager {
@@ -68,6 +69,19 @@ public class ImageManager {
         }
 
         return CLASSNAME_IMAGE_MAP.get(object.getClass().getName());
+    }
+
+    public static Texture getBackground(Difficulty difficulty) {
+        switch (difficulty) {
+            case EASY:
+                return BACKGROUND_IMAGE;
+            case NORMAL:
+                return BACKGROUND_IMAGE2;
+            case DIFFICULT:
+                return BACKGROUND_IMAGE3;
+            default:
+                return null;
+        }
     }
 
 

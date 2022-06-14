@@ -44,9 +44,17 @@ public class DifficultyActivity extends Activity {
     }
 
     private void goGame() {
-        Intent intent = new Intent(this, AndroidLauncher.class);
+        boolean isOnline = binding.onlineswitch.isChecked();
+        Intent intent;
+        if(isOnline) {
+            intent = new Intent(this, LoginActivity.class);
+        }else {
+            intent = new Intent(this, AndroidLauncher.class);
+        }
         intent.putExtra("difficulty", difficulty);
         intent.putExtra("isSoundOn",binding.soundswitch.isChecked());
+        intent.putExtra("isOnline",isOnline);
+        intent.putExtra("username", "");
         startActivity(intent);
     }
 }

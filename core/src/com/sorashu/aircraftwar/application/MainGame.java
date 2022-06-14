@@ -30,9 +30,13 @@ import java.util.List;
 
 public class MainGame extends ApplicationAdapter {
 
-    public MainGame(CommunicationInterface communicationInterface, int difficulty, boolean isSoundOn) {
+    public MainGame(CommunicationInterface communicationInterface, int difficulty, boolean isSoundOn, boolean isOnline, String username) {
         this.communicationInterface = communicationInterface;
         difficultyGen(difficulty);
+        this.isOnline = isOnline;
+        this.username = username;
+        this.isSoundOn = isSoundOn;
+
     }
 
     private void difficultyGen(int diffIndex) {
@@ -69,6 +73,9 @@ public class MainGame extends ApplicationAdapter {
     private float backgroundTop;
 
     private Difficulty difficulty;
+    private boolean isSoundOn;
+    private boolean isOnline;
+    private String username;
 
 
     private int enemyMaxNum = 5;
@@ -98,7 +105,7 @@ public class MainGame extends ApplicationAdapter {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, viewportWidth, viewportHeight);
         viewport = new ExtendViewport(viewportWidth, viewportHeight, camera);
-        backgroundTexture = ImageManager.BACKGROUND_IMAGE;
+        backgroundTexture = ImageManager.getBackground(difficulty);
 
         backgroundTop = viewportHeight;
 
@@ -126,7 +133,8 @@ public class MainGame extends ApplicationAdapter {
         batch.begin();
         drawBackground();
         drawAllObjectAndRemove();
-        font.draw(batch, "SCORE: " + score + "\nLIFE:" + heroAircraft.getHp(), 5, viewportHeight - 10);
+//        font.draw(batch, "SCORE: " + score + "\nLIFE:" + heroAircraft.getHp(), 5, viewportHeight - 10);
+        drawFont();
         batch.end();
 
         /*--------------------------------------------
@@ -164,6 +172,17 @@ public class MainGame extends ApplicationAdapter {
     /*--------------------------------------------
                        TODO:action 各部分
     ---------------------------------------------*/
+
+    private void drawFont() {
+        String info;
+        if (isOnline) {
+            info = "USER: " + username + "\nSCORE: " + score + "\nLIFE:" + heroAircraft.getHp();
+        } else {
+            info = "SCORE: " + score + "\nLIFE:" + heroAircraft.getHp();
+        }
+        font.draw(batch, info, 5, viewportHeight - 10);
+
+    }
 
     private void normalEnemyGen() {
         if (enemyAircrafts.size() < enemyMaxNum) {

@@ -8,4 +8,8 @@
     <string name="cap_difficult">DIFFICULT</string>
     <string name="sound">sound</string>
     <string name="difficultychoices">Difficulty Choices</string>
+    <string name="login">Login</string>
+    <string name="username">username</string>
+    <string name="password">password</string>
+    <string name="online">online</string>
 </resources>

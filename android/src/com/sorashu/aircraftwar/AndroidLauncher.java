@@ -13,8 +13,10 @@ public class AndroidLauncher extends AndroidApplication {
 		AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
 
 		int difficulty = getIntent().getIntExtra("difficulty", 0);
-		boolean soundIsOn = getIntent().getBooleanExtra("isSoundOn", false);
+		boolean isSoundOn = getIntent().getBooleanExtra("isSoundOn", false);
+		boolean isOnline = getIntent().getBooleanExtra("isOnline",false);
+		String username = getIntent().getStringExtra("username");
 
-		initialize(new MainGame(new CommunicationImpl(this),difficulty,soundIsOn), config);
+		initialize(new MainGame(new CommunicationImpl(this),difficulty,isSoundOn,isOnline,username), config);
 	}
 }

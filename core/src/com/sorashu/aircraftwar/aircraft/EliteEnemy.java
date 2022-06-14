@@ -44,7 +44,7 @@ public class EliteEnemy extends EnemyAircraft{
                 break;
         }
         if (propfactory != null) {
-            list.add(propfactory.createProp(this.getCenterX(), this.getCenterY(), speedX, speedY));
+            list.add(propfactory.createProp(this.getCenterX(), this.getCenterY(), speedX, -speedY));
         }
         return list;
     }

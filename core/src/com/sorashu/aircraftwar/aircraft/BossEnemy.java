@@ -31,7 +31,7 @@ public class BossEnemy extends EnemyAircraft{
         for (PropFactory propfactory : propfactoryset) {
             Random rnd = new Random();
             int propSpeedX = rnd.nextInt(100);
-            list.add(propfactory.createProp(this.getCenterX(), this.getCenterY(), propSpeedX, 100));
+            list.add(propfactory.createProp(this.getCenterX(), this.getCenterY(), propSpeedX, -100));
         }
         return list;
     }
